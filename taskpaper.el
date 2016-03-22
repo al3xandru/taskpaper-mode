@@ -1,4 +1,4 @@
-(defvar taskpaper-mode-map nil "Keymap for taskpaper-mode")
+(defvar taskpaper-mode-map (make-sparse-keymap) "Keymap for taskpaper-mode")
 (when (not taskpaper-mode-map)
   (setq taskpaper-mode-map (make-sparse-keymap))
   (define-key taskpaper-mode-map (kbd "<S-return>") 'taskpaper-focus-selected-project)
@@ -13,12 +13,10 @@
         (".*:$" . font-lock-function-name-face)
         ("^ *[^- ].*[^:]$" . font-lock-comment-face)
         ("@.*" . font-lock-variable-name-face)
-        
         )
       )
 
 (defun taskpaper-functions()
-
   (defun taskpaper-chose-project()
     "Show a list of projects to chose from."
     (interactive)
@@ -32,7 +30,7 @@
         )
       (goto-char startpoint)
 
-      (when (get-buffer buffer) 
+      (when (get-buffer buffer)
         (kill-buffer buffer))
       ;;Open popupwindow for selecting project
       (split-window-vertically (- (+ (length projects) 1)))
@@ -48,8 +46,7 @@
       )
     (toggle-read-only t)
     (local-set-key (kbd "<return>") 'taskpaper-projectwindow-select)
-    (local-set-key (kbd "<ESC> <ESC>") 'taskpaper-projectwindow-esc)  
-    )
+    (local-set-key (kbd "<ESC> <ESC>") 'taskpaper-projectwindow-esc))
 
   (defun taskpaper-projectwindow-esc()
     "Exit projectwindow, not selecting a project"
@@ -58,8 +55,7 @@
     (local-unset-key (kbd "<ESC> <ESC>"))
     (kill-buffer)
     (delete-window)
-    (other-window (- 1))
-    )
+    (other-window (- 1)))
 
   (defun taskpaper-projectwindow-select()
     "Action to perform when project is selected in project window."
@@ -76,10 +72,7 @@
       (goto-char 0)
       (re-search-forward project)
       (taskpaper-unfocus-project)
-      (taskpaper-focus-selected-project)
-      
-      )
-    )
+      (taskpaper-focus-selected-project)))
 
   (defun taskpaper-focus-selected-project()
     "Hide everything not related to project under cursor."
@@ -95,15 +88,12 @@
       (setq end (point))
       (add-text-properties 1 start '(invisible t))
       (add-text-properties end (point-max) '(invisible t))
-      (goto-char startpoint)
-      )
-    )
+      (goto-char startpoint)))
 
   (defun taskpaper-unfocus-project()
     "Show all projects if focused on one."
     (interactive)
-    (add-text-properties 1 (point-max) '(invisible nil))
-    )
+    (add-text-properties 1 (point-max) '(invisible nil)))
 
   (defun taskpaper-toggle-done()
     "Toggle done status on task, this sets @done-tag with date."
@@ -125,9 +115,7 @@
           )
         )
       (when (not (equal (point) (line-end-position)))
-        (goto-char startpoint))
-      )
-    )
+        (goto-char startpoint))))
   )
 
 (defun taskpaper-mode ()
@@ -138,13 +126,13 @@
   (setq major-mode 'taskpaper-mode)
   (setq mode-name "Taskpaper") ; for display purposes in mode line
   (use-local-map taskpaper-mode-map)
-  
+
   (taskpaper-functions)
   (setq font-lock-defaults '(tpKeywords))
-  
+
   ;; Dont wrap lines
   (toggle-truncate-lines t)
-  
+
   ;; ... other code here
 
   (run-hooks 'taskpaper-mode-hook))
