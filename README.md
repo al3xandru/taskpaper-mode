@@ -12,19 +12,23 @@ the following features:
 
 Put `taskpaper-mode.el` file somewhere and add it to your `init.el`:
 
-    (load-file "~/taskpaper-mode/taskpaper-mode.el")
-    (require 'taskpaper-mode)
+```elisp
+(load-file "~/taskpaper-mode/taskpaper-mode.el")
+(require 'taskpaper-mode)
+```
 
 ### Spacemacs
 
 If  you are using Spacemacs:
 
-    (defun dotspacemacs/layers ()
-        ;; ...
-        dotspacemacs-additional-packages
-        '(
-            (taskpaper-mode :location (recipe :fetcher github :repo "al3xandru/taskpaper-mode" :branch dev))
-         ))
+```elisp
+(defun dotspacemacs/layers ()
+    ;; ...
+    dotspacemacs-additional-packages
+    '(
+        (taskpaper-mode :location (recipe :fetcher github :repo "al3xandru/taskpaper-mode" :branch dev))
+     ))
+```
 
 ## Keyboard shortcuts
  
@@ -37,13 +41,17 @@ If  you are using Spacemacs:
 
 Append date to @done:
 
+```elisp
     (setq taskpaper-append-date-to-done t)
+```
 
 Add special faces for tags:
 
-    (font-lock-add-keywords 'taskpaper-mode
-                          '(
-                            ("@important" . font-lock-keyword-face)
-                            ("@today" . font-lock-string-face)))
+```elisp
+(font-lock-add-keywords 'taskpaper-mode
+                      '(
+                        ("@important" . font-lock-keyword-face)
+                        ("@today" . font-lock-string-face)))
+```
 
 [taskpaper.el]: https://github.com/jedthehumanoid/taskpaper.el
