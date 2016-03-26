@@ -82,7 +82,7 @@
 
 (defvar taskpaper-mode-syntax-table
   (let ((syntax-table (make-syntax-table)))
-    (modify-syntax-entry ?" "w" syntax-table)
+    (modify-syntax-entry ?\" "w" syntax-table)
     (modify-syntax-entry ?- "_" syntax-table)
     (modify-syntax-entry ?@ "." syntax-table)
     syntax-table)
