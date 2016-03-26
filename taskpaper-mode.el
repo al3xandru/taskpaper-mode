@@ -76,7 +76,6 @@
   '(
     (".*@done.*" . font-lock-comment-face)
     (".*:$" . font-lock-function-name-face)
-    ("@important" . (0 font-lock-keyword-face))
     ("@[^ \n]+" . font-lock-constant-face)
     ("^ *[^- ].*[^:]$" . font-lock-doc-face)
     ))
