@@ -74,9 +74,10 @@
 ;; Mode setup
 (defvar taskpaper-font-lock-keywords
   '(
-    (".*@done.*" . font-lock-comment-face)
     (".*:$" . font-lock-function-name-face)
-    ("@[^ \n]+" . font-lock-constant-face)
+    (".*@done.*" . font-lock-comment-face)
+    ("@\\sw+(?[^ )\n]*)?" . font-lock-constant-face)
+    ; ("\\sw+://[^ >)]+" . font-lock-builtin-face)
     ("^ *[^- ].*[^:]$" . font-lock-doc-face)
     ))
 
@@ -85,6 +86,8 @@
     (modify-syntax-entry ?\" "w" syntax-table)
     (modify-syntax-entry ?- "_" syntax-table)
     (modify-syntax-entry ?@ "." syntax-table)
+    (modify-syntax-entry ?< "." syntax-table)
+    (modify-syntax-entry ?> "." syntax-table)
     syntax-table)
   "Syntax table in use in `taskpaper-mode' buffers.")
 
