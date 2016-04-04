@@ -81,16 +81,6 @@
     ("^ *[^- ].*[^:]$" . font-lock-doc-face)
     ))
 
-(defvar taskpaper-mode-syntax-table
-  (let ((syntax-table (make-syntax-table)))
-    (modify-syntax-entry ?\" "w" syntax-table)
-    (modify-syntax-entry ?- "_" syntax-table)
-    (modify-syntax-entry ?@ "." syntax-table)
-    (modify-syntax-entry ?< "." syntax-table)
-    (modify-syntax-entry ?> "." syntax-table)
-    syntax-table)
-  "Syntax table in use in `taskpaper-mode' buffers.")
-
 (defvar taskpaper-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "<S-return>") 'taskpaper-focus-selected-project)
@@ -98,7 +88,7 @@
     (define-key map (kbd "C-c d") 'taskpaper-toggle-done)
     (define-key map (kbd "C-c l") 'taskpaper-choose-project)
     map)
-  " Keymap for `taskpaper-mode'")
+  "Keymap for `taskpaper-mode'")
 
 ;;;###autoload
 (define-derived-mode taskpaper-mode text-mode "TaskPaper"
@@ -215,6 +205,16 @@
   "Show all projects if focused on one."
   (interactive)
   (add-text-properties 1 (point-max) '(invisible nil)))
+
+(defvar taskpaper-mode-syntax-table
+  (let ((syntax-table (make-syntax-table)))
+    (modify-syntax-entry ?- "_" syntax-table)
+    (modify-syntax-entry ?@ "." syntax-table)
+    (modify-syntax-entry ?< "." syntax-table)
+    (modify-syntax-entry ?> "." syntax-table)
+    (modify-syntax-entry ?\" "w" syntax-table)
+    syntax-table)
+  "Syntax table in use in `taskpaper-mode' buffers.")
 
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.taskpaper$" . taskpaper-mode))
