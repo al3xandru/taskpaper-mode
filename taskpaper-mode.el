@@ -220,3 +220,4 @@
 (add-to-list 'auto-mode-alist '("\\.taskpaper$" . taskpaper-mode))
 
 (provide 'taskpaper-mode)
+;;; taskpaper-mode.el ends here
